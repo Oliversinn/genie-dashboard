@@ -1,0 +1,16 @@
+Package: genie-dashboard
+Title: GENIE Metadata Explorer Dashboard
+Version: 1.0.0
+Description: A Shiny dashboard for exploring GENIE (Genomics Evidence Neoplasia Information Exchange) metadata.
+    This app provides interactive visualizations and data exploration tools for cancer genomics data.
+Depends: 
+    R (>= 3.6.0)
+Imports:
+    shiny (>= 1.6.0),
+    shinydashboard (>= 0.7.1),
+    DT (>= 0.18),
+    plotly (>= 4.9.0),
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.0)
+License: MIT
+Encoding: UTF-8
