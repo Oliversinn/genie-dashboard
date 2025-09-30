@@ -22,15 +22,95 @@ server <- function(input, output) {
     }
     
     df
-  })  
+  })
+  
+  # Value Boxes ----
+  ## Centers ----
+  output$box_centers <- renderValueBox({
+    number_of_centers <- genie_reactive() %>%
+      summarise(n_centers = n_distinct(Center)) %>%
+      pull(n_centers)
+    valueBox(
+      vb_style(
+        number_of_centers, "font-size: 90%;"
+      ),
+      vb_style(
+        "Number of centers", "font-size: 95%;"
+      ),
+      icon = icon("hospital"),
+      color = "orange"
+    )
+  })
+  
+  ## Cases ----
+  output$box_cases <- renderValueBox({
+    number_of_cases <- genie_reactive() %>%
+      summarise(n_cases = n_distinct(Patient.ID)) %>%
+      pull(n_cases)
+    valueBox(
+      vb_style(
+        number_of_cases, "font-size: 90%;"
+      ),
+      vb_style(
+        "Number of cases", "font-size: 95%;"
+      ),
+      icon = icon("user-group"),
+      color = "orange"
+    )
+  })
+  
+  ## Cancer Type ----
+  output$box_cancer_type <- renderValueBox({
+    number_of_cancers <- genie_reactive() %>%
+      summarise(n_cancers = n_distinct(Cancer.Type)) %>%
+      pull(n_cancers)
+    valueBox(
+      vb_style(
+        number_of_cancers, "font-size: 90%;"
+      ),
+      vb_style(
+        "Number of cancer types", "font-size: 95%;"
+      ),
+      icon = icon("disease"),
+      color = "orange"
+    )
+  })
+  
+  ## Interval of Death ----
+  output$box_interval_of_death <- renderValueBox({
+    avg_interval_dod <- genie_reactive() %>%
+      filter(!is.na(interval_dod), interval_dod >= 0) %>%
+      summarise(avg_dod = mean(interval_dod)) %>%
+      pull(avg_dod) %>%
+      round(2)
+    valueBox(
+      vb_style(
+        avg_interval_dod, "font-size: 90%;"
+      ),
+      vb_style(
+        "Avg. interval of death (years)", "font-size: 95%;"
+      ),
+      icon = icon("clock"),
+      color = "orange"
+    )
+  })
+  
+  # Genie data table ----
   
   output$genie_head <- renderDataTable({
     genie_reactive()
   },
   options = list(
-    scrollX = TRUE,        # enables horizontal scrolling
-    pageLength = 10,       # show 10 rows per page
-    lengthMenu = c(5, 10, 25, 50), # dropdown to change rows/page
-    autoWidth = TRUE       # adjust column widths
+    scrollX = TRUE,
+    pageLength = 10,
+    lengthMenu = c(5, 10, 25, 50),
+    autoWidth = TRUE
   ))
+  
+  
+  output$survival_hist <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    survival_bar_plot(df)
+  })
 }

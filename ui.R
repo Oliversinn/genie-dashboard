@@ -64,15 +64,25 @@ dashboardPage(
   body = dashboardBody(
     fluidPage(
       tabItems(
+        # Dashboard Tab ----
         tabItem(
           tabName = "dashboard",
           h2("Dashboard"),
+          fluidRow(
+            valueBoxOutput("box_centers", width = 3),
+            valueBoxOutput("box_cases", width = 3),
+            valueBoxOutput("box_cancer_type", width = 3),
+            valueBoxOutput("box_interval_of_death", width = 3)
+          ),
+          plotOutput("survival_hist", height = 350)
         ),
+        # Data Explorer Tab ----
         tabItem(
           tabName = "data_explorer",
           h2("Data Explorer"),
           dataTableOutput("genie_head")
         ),
+        # About Tab ----
         tabItem(
           tabName = "about",
           h2("About")
