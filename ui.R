@@ -74,7 +74,54 @@ dashboardPage(
             valueBoxOutput("box_cancer_type", width = 3),
             valueBoxOutput("box_interval_of_death", width = 3)
           ),
-          plotOutput("survival_hist", height = 350)
+          fluidRow(
+            width = 12,
+            tabBox(
+              width = 12,
+              height = "400px",
+              tabPanel(
+                title = "Cancer Types",
+                icon = icon("disease"),
+                plotOutput("cancer_barplot", height = 350)
+              ),
+              tabPanel(
+                title = "Overall Survival",
+                icon = icon("user-clock"),
+                plotOutput("survival_hist", height = 350)
+              )
+            )
+          ),
+          fluidRow(
+            width = 12,
+            tabBox(
+              width = 6,
+              height = "400px",
+              tabPanel(
+                title = "Demographic Pyramid",
+                icon = icon("venus-mars"),
+                plotOutput("demographic_pyramid", height = 350)
+              )
+            ),
+            tabBox(
+              width = 6,
+              height = "400px",
+              tabPanel(
+                title = "Race",
+                icon = icon("earth-americas"),
+                plotOutput("race_barplot", height = 350)
+              ),
+              tabPanel(
+                title = "Ethnicity",
+                icon = icon("chart-simple"),
+                plotOutput("ethnicity_barplot", height = 350)
+              ),
+              tabPanel(
+                title = "Ethnicity by Center",
+                icon = icon("chart-simple"),
+                plotOutput("ethnicity_heatmap", height = 350)
+              )
+            )
+          )
         ),
         # Data Explorer Tab ----
         tabItem(

@@ -113,4 +113,34 @@ server <- function(input, output) {
     if (nrow(df) == 0) return(NULL)
     survival_bar_plot(df)
   })
+  
+  output$cancer_barplot <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    cancer_barplot(df)
+  })
+  
+  output$demographic_pyramid <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    demographic_pyramid(df)
+  })
+  
+  output$ethnicity_barplot <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    ethincity_barplot(df)
+  })
+  
+  output$ethnicity_heatmap <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    ethnicity_heatmap(df)
+  })
+  
+  output$race_barplot <- renderPlot({
+    df <- genie_reactive()
+    if (nrow(df) == 0) return(NULL)
+    race_barplot(df)
+  })
 }
