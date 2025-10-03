@@ -73,7 +73,6 @@ survival_bar_plot <- function(df) {
       x = "Years from Sequencing to Death",
       y = "Number of Cases"
     ) +
-    theme_minimal() +
     theme(plot.title = element_text(hjust = 0.5))
 }
 
