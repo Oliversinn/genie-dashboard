@@ -46,7 +46,8 @@ server <- function(input, output) {
   output$box_cases <- renderValueBox({
     number_of_cases <- genie_reactive() %>%
       summarise(n_cases = n_distinct(Patient.ID)) %>%
-      pull(n_cases)
+      pull(n_cases) %>% 
+      comma()
     valueBox(
       vb_style(
         number_of_cases, "font-size: 90%;"
